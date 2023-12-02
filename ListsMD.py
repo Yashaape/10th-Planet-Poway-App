@@ -1,6 +1,7 @@
 from kivymd.app import MDApp
 from kivy.lang import Builder
 from kivymd.uix.list import ThreeLineAvatarListItem
+from kivymd.uix.list import ImageLeftWidget, ImageRightWidget
 from ListsMD_Helper import list_helper
 
 class DemoListApp(MDApp):
@@ -24,7 +25,11 @@ class DemoListApp(MDApp):
 
     def on_start(self): #called when application starts
         for i in range(20):
+            Limg = ImageLeftWidget(source="10thPlanetPoway.png")
+            #Rimg = ImageRightWidget(source="Generic_Blank_Avatar.png") Image Right Widget does not work at this time with this version of kivymd
             items = ThreeLineAvatarListItem(text='Member #P' + str(i), secondary_text='First & Last Name',
                                            tertiary_text='Email Address')
+            items.add_widget(Limg)
             self.root.ids.container.add_widget(items) #Important, self.root.ids. used to add items to container variable in ListsMD_Helper
+
 DemoListApp().run()
