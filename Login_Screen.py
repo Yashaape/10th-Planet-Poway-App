@@ -26,12 +26,9 @@ class Login(MDApp):
         return screen
 
     def show_data(self):
-        username_field = self.root.ids.username_field
-        password_field = self.root.ids.text_field
-        username = username_field.text
-        password = password_field.text
-        print(f"Username: {username}, Password: {password}")
-
-
+        # Retrieve the text from the username field and print it
+        username_text = self.root.ids.clickabletextfieldround.ids.username_field.text
+        password_text = self.root.ids.clickabletextfieldround.ids.text_field.text
+        print(f'Username: {username_text}, Password: {password_text}')
 
 Login().run()

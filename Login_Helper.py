@@ -27,7 +27,7 @@ Login_helper = '''
         pos: username_field.width - self.width + dp(8), 0
         theme_icon_color: "Custom"
         icon_color: app.theme_cls.primary_color
-        on_press: root.show_data()
+        on_press: app.show_data()
         
     MDIconButton:
         icon: "eye-off"
@@ -45,6 +45,7 @@ Login_helper = '''
         text_color: app.theme_cls.primary_color
         font_size: 15
         pos_hint: {"center_x": 0.18}
+        on_press: app.show_data() #change later, testing purposes for now
           
     MDTextButton:
         id: create_account
@@ -53,7 +54,8 @@ Login_helper = '''
         text_color: app.theme_cls.primary_color
         font_size: 15
         pos_hint: {"center_x": 0.83}
-
+        on_press: app.show_data() #change later, testing purposes for now
+        
 MDScreen:
     name: 'login_screen'                
     Image:
@@ -63,6 +65,7 @@ MDScreen:
         pos_hint: {"top": 1.0} #aligns top of image to top
         
     ClickableTextFieldRound:
+        id: clickabletextfieldround
         size_hint: None, None
         width: "300dp"
         hint_text: "Password"
