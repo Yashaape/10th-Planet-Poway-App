@@ -7,7 +7,7 @@ from kivymd.uix.screen import MDScreen
 from kivymd.uix.screenmanager import MDScreenManager
 from kivy.core.window import Window
 
-Window.size = (300, 500) #Note this  needs to be removed once we create the app, this is for testing
+Window.size = (325, 580) #Note this  needs to be removed once we create the app, this is for testing
 
 # Create Profile screen
 class ProfileScreen(MDScreen):
