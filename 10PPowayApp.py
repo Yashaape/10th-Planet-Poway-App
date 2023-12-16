@@ -2,6 +2,7 @@ from kivymd.app import MDApp
 from kivymd.uix.screenmanager import MDScreenManager
 from kivymd.uix.screen import MDScreen
 from Modules.Screens.login_screen import LoginScreen
+from Modules.Screens.schedule_screen import ScheduleScreen
 from Modules.Screens.main_menu import MainMenuScreen
 from kivymd.uix.button import MDRectangleFlatButton, MDFlatButton
 from kivymd.uix.dialog import MDDialog
@@ -26,9 +27,11 @@ class MyApp(MDApp):
         Factory.register('ClickableTextFieldRound', module='Modules.Widgets.clickable_text_field_round')
         Factory.register('MainMenuScreen', module='Modules.Screens.main_menu')
         Factory.register('ContentNavigationDrawer', module='Modules.Widgets.content_navigation_drawer')
+        Factory.register('ScheduleScreen', module='Modules.Screens.schedule_screen')
         # Add other screens to the ScreenManager
         screen_manager.add_widget(LoginScreen(name='login'))
         screen_manager.add_widget(MainMenuScreen(name='main_menu'))
+        screen_manager.add_widget(ScheduleScreen(name='schedule_screen'))
         return screen_manager
 
     def show_data(self):
@@ -40,10 +43,10 @@ class MyApp(MDApp):
     def login_dialog(self):
         username_text = self.root.current_screen.ids.clickable_text_field_round.ids.username_field.text
         password_text = self.root.current_screen.ids.clickable_text_field_round.ids.text_field.text
-        if username_text != "brasgaitis97@gmail.com":
+        if username_text != "":
             user_error = f"{username_text} user does not exist."
         else:
-            if password_text == "your_correct_password":  # Replace with the actual correct password
+            if password_text == "":  # Replace with the actual correct password
                 user_error = "Username and password correct. Login success!"
                 self.root.current = 'main_menu'
             else:
