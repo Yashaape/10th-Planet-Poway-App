@@ -1,0 +1,58 @@
+<ContentNavigationDrawer>
+    BoxLayout:
+        orientation: 'vertical'
+        spacing: '8dp'
+        padding: '8dp'
+        Image:
+            source: '10thPlanetPoway.png'
+        MDLabel:
+            text: 'Brandon'
+            font_style: 'Subtitle1'
+            size_hint_y: None
+            height: self.texture_size[1]
+        MDLabel:
+            text: 'brasgaitis97@gmail.com'
+            font_style: 'Caption'
+            size_hint_y: None
+            height: self.texture_size[1]
+        MDList:
+            OneLineIconListItem:
+                text: 'Profile'
+                on_press:
+                    root.nav_drawer.set_state("close")
+                    #root.screen_manager.current = "profile"
+                IconLeftWidget:
+                    icon: 'account'
+
+            OneLineIconListItem:
+                text: 'Announcements'
+                on_press:
+                    root.nav_drawer.set_state("close")
+                    #root.screen_manager.current = "announcements"
+                IconLeftWidget:
+                    icon: 'bullhorn'
+
+            OneLineIconListItem:
+                text: 'Live Schedule'
+                on_press:
+                    root.nav_drawer.set_state("close")
+                    #root.screen_manager.current = "announcements"
+                IconLeftWidget:
+                    icon: 'calendar-clock'
+
+            OneLineIconListItem:
+                text: 'Chat'
+                on_press:
+                    root.nav_drawer.set_state("close")
+                    #root.screen_manager.current = "announcements"
+                IconLeftWidget:
+                    icon: 'message-text'
+
+            OneLineIconListItem:
+                text: 'Logout'
+                on_press:
+                    root.nav_drawer.set_state("close")
+                    app.logout()
+                IconLeftWidget:
+                    icon: 'logout'
+

@@ -16,5 +16,3 @@ class ClickableTextFieldRound(MDRelativeLayout):
     hint_text = StringProperty()
     username = StringProperty()
     username_hint_text = StringProperty()
-
-

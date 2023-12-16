@@ -1,5 +1,11 @@
 # login_screen.kv
 <LoginScreen>:
+    Image:
+        source: '10thPlanetPoway.png'
+        size_hint_y: None #allows setting a fixed height
+        height: dp(250)
+        pos_hint: {"top": 1.0} #aligns top of image to top
+
     ClickableTextFieldRound:
         id: clickable_text_field_round
         size_hint: None, None

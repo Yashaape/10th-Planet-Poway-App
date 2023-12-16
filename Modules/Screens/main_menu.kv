@@ -1,0 +1,25 @@
+<MainMenuScreen>:
+    name:'menu'
+    BoxLayout:
+        orientation: 'vertical'
+        MDTopAppBar:
+            title: 'Navigation Drawer Demo'
+            left_action_items: [["menu", lambda x: nav_drawer.set_state("open")]]
+            elevation: 4
+        Widget:
+        
+    MDNavigationLayout:
+        MDScreenManager: #Very important, it's how each button will switch to a new screen
+            id: screen_manager
+            MDScreen:
+                MDLabel:
+                    text: "Welcome to the 10P Poway App"
+                    halign: 'center'
+                    
+        MDNavigationDrawer:
+            id: nav_drawer
+            radius: (0, 16, 16, 0)
+            
+            ContentNavigationDrawer:
+                screen_manager: screen_manager
+                nav_drawer: nav_drawer
