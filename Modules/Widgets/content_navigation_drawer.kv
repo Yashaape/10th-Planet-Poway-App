@@ -20,7 +20,7 @@
                 text: 'Profile'
                 on_press:
                     root.nav_drawer.set_state("close")
-                    #root.screen_manager.current = "profile"
+                    root.screen_manager.current = "profile_screen"
                 IconLeftWidget:
                     icon: 'account'
 
@@ -28,7 +28,7 @@
                 text: 'Announcements'
                 on_press:
                     root.nav_drawer.set_state("close")
-                    #root.screen_manager.current = "announcements"
+                    root.screen_manager.current = "announcement_screen"
                 IconLeftWidget:
                     icon: 'bullhorn'
 
@@ -44,7 +44,7 @@
                 text: 'Chat'
                 on_press:
                     root.nav_drawer.set_state("close")
-                    #root.screen_manager.current = "announcements"
+                    root.screen_manager.current = "chat_screen"
                 IconLeftWidget:
                     icon: 'message-text'
 

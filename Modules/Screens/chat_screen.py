@@ -1,5 +1,5 @@
 from kivymd.uix.screen import MDScreen
 
 
-class ScheduleScreen(MDScreen):
+class ChatScreen(MDScreen):
     pass

@@ -2,8 +2,12 @@ from kivymd.app import MDApp
 from kivymd.uix.screenmanager import MDScreenManager
 from kivymd.uix.screen import MDScreen
 from Modules.Screens.login_screen import LoginScreen
-from Modules.Screens.schedule_screen import ScheduleScreen
 from Modules.Screens.main_menu import MainMenuScreen
+from Modules.Screens.schedule_screen import ScheduleScreen
+from Modules.Screens.profile_screen import ProfileScreen
+from Modules.Screens.announcement_screen import AnnouncementScreen
+from Modules.Screens.chat_screen import ChatScreen
+
 from kivymd.uix.button import MDRectangleFlatButton, MDFlatButton
 from kivymd.uix.dialog import MDDialog
 from kivy.factory import Factory
@@ -27,11 +31,13 @@ class MyApp(MDApp):
         Factory.register('ClickableTextFieldRound', module='Modules.Widgets.clickable_text_field_round')
         Factory.register('MainMenuScreen', module='Modules.Screens.main_menu')
         Factory.register('ContentNavigationDrawer', module='Modules.Widgets.content_navigation_drawer')
-        Factory.register('ScheduleScreen', module='Modules.Screens.schedule_screen')
+        #Factory.register('ScheduleScreen', module='Modules.Screens.schedule_screen')
+        #Factory.register('ProfileScreen', module='Modules.Screens.profile_screen')
         # Add other screens to the ScreenManager
         screen_manager.add_widget(LoginScreen(name='login'))
         screen_manager.add_widget(MainMenuScreen(name='main_menu'))
-        screen_manager.add_widget(ScheduleScreen(name='schedule_screen'))
+        #screen_manager.add_widget(ScheduleScreen(name='schedule_screen'))
+        #screen_manager.add_widget(ProfileScreen(name='profile_screen'))
         return screen_manager
 
     def show_data(self):
