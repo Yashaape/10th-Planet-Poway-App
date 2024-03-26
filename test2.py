@@ -1,23 +1,23 @@
-from kivymd.uix.screen import MDScreen
 from kivy.lang import Builder
-from kivymd.uix.menu import MDDropdownMenu
 from kivy.metrics import dp
-import os
+from kivymd.app import MDApp
+from kivymd.uix.menu import MDDropdownMenu
 
-# Get the current directory of the module
-module_dir = os.path.dirname(os.path.realpath(__file__))
+KV = '''
+MDScreen:
+    MDDropDownItem:
+        id: drop_item
+        pos_hint: {'center_x': .5, 'center_y': .5}
+        text: 'Color'
+        on_release: app.menu.open()
+'''
 
-# Load the kv file using a relative path
-kv_path = os.path.join(module_dir, 'profile_screen.kv')
-screen = Builder.load_file(kv_path)
 
-
-class ProfileScreen(MDScreen):
-
+class Test(MDApp):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
-
-        items = [
+        self.screen = Builder.load_string(KV)
+        menu_items = [
             {
                 "viewclass": "OneLineListItem",
                 "text": color,
@@ -26,12 +26,18 @@ class ProfileScreen(MDScreen):
             } for color in ['White', 'Blue', 'Purple', 'Brown', 'Black']
         ]
         self.menu = MDDropdownMenu(
-            caller=self.ids.belt_rank_field,
-            items=items,
+            caller=self.screen.ids.drop_item,
+            items=menu_items,
             position="center",
             width_mult=4,
         )
 
     def set_item(self, text_item):
-        self.ids.belt_rank_field.set_item(text_item)
+        self.screen.ids.drop_item.set_item(text_item)
         self.menu.dismiss()
+
+    def build(self):
+        return self.screen
+
+
+Test().run()
