@@ -28,15 +28,16 @@ class MyApp(MDApp):
 
         Factory.register('LoginScreen', module='Modules.Screens.login_screen')
         Factory.register('ClickableTextFieldRound', module='Modules.Widgets.clickable_text_field_round')
+        Factory.register('ProfileScreen', module='Modules.Screens.profile_screen')
         Factory.register('MainMenuScreen', module='Modules.Screens.main_menu')
         Factory.register('ContentNavigationDrawer', module='Modules.Widgets.content_navigation_drawer')
         #Factory.register('ScheduleScreen', module='Modules.Screens.schedule_screen')
-        #Factory.register('ProfileScreen', module='Modules.Screens.profile_screen')
+
         # Add other screens to the ScreenManager
         screen_manager.add_widget(LoginScreen(name='login'))
         screen_manager.add_widget(MainMenuScreen(name='main_menu'))
+        screen_manager.add_widget(ProfileScreen(name='profile_screen'))
         #screen_manager.add_widget(ScheduleScreen(name='schedule_screen'))
-        #screen_manager.add_widget(ProfileScreen(name='profile_screen'))
         return screen_manager
 
     def show_data(self):
