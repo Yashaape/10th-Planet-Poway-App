@@ -1,7 +1,6 @@
 from kivy.lang import Builder
 from kivy.properties import ObjectProperty
 from kivymd.uix.scrollview import MDScrollView
-from Modules.Screens.profile_screen import ProfileScreen
 import os
 
 # Get the current directory of the module

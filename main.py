@@ -42,6 +42,7 @@ class MyApp(MDApp):
         screen_manager.add_widget(ScheduleScreen(name='schedule_screen'))
         screen_manager.add_widget(ChatScreen(name='chat_screen'))
         screen_manager.add_widget(AnnouncementScreen(name='announcement_screen'))
+
         return screen_manager
 
     def show_data(self):
