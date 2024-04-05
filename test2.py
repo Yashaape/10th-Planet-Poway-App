@@ -1,43 +1,66 @@
+from kivy.app import App
+from kivy.uix.screenmanager import ScreenManager
+from kivymd.uix.screen import MDScreen
 from kivy.lang import Builder
-from kivy.metrics import dp
-from kivymd.app import MDApp
-from kivymd.uix.menu import MDDropdownMenu
+from kivy.uix.label import Label
 
 KV = '''
-MDScreen:
-    MDDropDownItem:
-        id: drop_item
-        pos_hint: {'center_x': .5, 'center_y': .5}
-        text: 'Color'
-        on_release: app.menu.open()
+<ChatScreen>:
+    name: 'chat_screen'
+
+    BoxLayout:
+        orientation: 'vertical'
+
+        MDToolbar:
+            title: 'Chat'
+            left_action_items: [["arrow-left", lambda x: app.change_screen('main')]]
+
+        ScrollView:
+            MDList:
+                id: chat_messages
+
+        BoxLayout:
+            padding: '10dp'
+            spacing: '10dp'
+
+            MDTextField:
+                id: message_input
+                hint_text: 'Type your message'
+                mode: 'fill'
+
+            MDIconButton:
+                icon: 'send'
+                on_release: app.send_message(message_input.text)
 '''
 
+Builder.load_string(KV)
 
-class Test(MDApp):
-    def __init__(self, **kwargs):
-        super().__init__(**kwargs)
-        self.screen = Builder.load_string(KV)
-        menu_items = [
-            {
-                "viewclass": "OneLineListItem",
-                "text": color,
-                "height": dp(56),
-                "on_release": lambda x=color: self.set_item(x),
-            } for color in ['White', 'Blue', 'Purple', 'Brown', 'Black']
-        ]
-        self.menu = MDDropdownMenu(
-            caller=self.screen.ids.drop_item,
-            items=menu_items,
-            position="center",
-            width_mult=4,
-        )
 
-    def set_item(self, text_item):
-        self.screen.ids.drop_item.set_item(text_item)
-        self.menu.dismiss()
+class ChatScreen(MDScreen):
+    pass
 
+class MyApp(App):
     def build(self):
-        return self.screen
+        self.screen_manager = ScreenManager()
+
+        # Create instances of screens
+        self.main_screen = Label(text="This is the main screen")
+        self.chat_screen = ChatScreen()
+
+        # Add screens to the screen manager
+        self.screen_manager.add_widget(self.main_screen)
+        self.screen_manager.add_widget(self.chat_screen)
+
+        return self.screen_manager
+
+    def change_screen(self, screen_name):
+        self.screen_manager.current = screen_name
+
+    def send_message(self, message):
+        # Code to send the message and update the UI
+        # You need to implement this according to your requirements
+        print("Sending message:", message)
 
 
-Test().run()
+if __name__ == '__main__':
+    MyApp().run()
