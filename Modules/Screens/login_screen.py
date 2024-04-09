@@ -1,13 +1,23 @@
 from kivymd.uix.screen import MDScreen
 from kivy.lang import Builder
-import os
 
-# Get the current directory of the module
-module_dir = os.path.dirname(os.path.realpath(__file__))
+KV = '''
+<LoginScreen>:
+    Image:
+        source: '10thPlanetPoway.png'
+        size_hint_y: None #allows setting a fixed height
+        height: dp(250)
+        pos_hint: {"top": 1.0} #aligns top of image to top
 
-# Load the kv file using a relative path
-kv_path = os.path.join(module_dir, 'login_screen.kv')
-Builder.load_file(kv_path)
+    ClickableTextFieldRound:
+        id: clickable_text_field_round
+        size_hint: None, None
+        width: "300dp"
+        hint_text: "Password"
+        pos_hint: {"center_x": .5, "center_y": .35}
+
+'''
+Builder.load_string(KV)
 
 
 class LoginScreen(MDScreen):

@@ -3,14 +3,36 @@ from kivy.lang import Builder
 from kivymd.uix.menu import MDDropdownMenu
 from kivy.metrics import dp
 from kivy.properties import ObjectProperty
-import os
 
-# Get the current directory of the module
-module_dir = os.path.dirname(os.path.realpath(__file__))
+KV = '''
+<ProfileScreen>:
+    name: 'profile_screen'
+    BoxLayout:
+        orientation: 'vertical'
+        spacing: dp(20)
+        padding: dp(20)
 
-# Load the kv file using a relative path
-kv_path = os.path.join(module_dir, 'profile_screen.kv')
-Builder.load_file(kv_path)
+        MDLabel:
+            text: "Profile"
+            halign: 'center'
+            font_style: 'H4'
+
+        MDLabel:
+            id: name_field
+            text: "Name"
+            mode: "rectangle"
+
+        MDLabel:
+            id: email_field
+            text: "Email"
+            mode: "rectangle"
+
+        MDDropDownItem:
+            id: belt_rank_field
+            text: "Belt Rank"
+            on_release: root.menu.open()
+'''
+Builder.load_string(KV)
 
 
 class ProfileScreen(MDScreen):
