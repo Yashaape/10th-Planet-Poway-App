@@ -1,42 +1,60 @@
 from kivymd.uix.screen import MDScreen
-from kivy.lang import Builder
 from kivymd.uix.menu import MDDropdownMenu
+from kivy.lang import Builder
 from kivy.metrics import dp
-from kivy.properties import ObjectProperty
 
 KV = '''
 <ProfileScreen>:
     name: 'profile_screen'
-    BoxLayout:
+
+    MDBoxLayout:
         orientation: 'vertical'
         spacing: dp(20)
         padding: dp(20)
+        
+        MDBoxLayout:
+            orientation: 'vertical'
+            spacing: dp(10)
+            
+            Image:
+                source: 'Generic_Blank_Avatar.png'  # Replace '.png' with the actual path to your image
+                size_hint_y: None
+                height: dp(300)  # Adjust the height as needed
+                pos_hint: {'center_x': 0.5}
+                allow_stretch: True  # Adjusts the aspect ratio to fit the space
 
-        MDLabel:
-            text: "Profile"
-            halign: 'center'
-            font_style: 'H4'
+            MDTextField:
+                hint_text: "Name"
+                mode: "rectangle"
+                size_hint_y: None
+                height: dp(40)
+                readonly: True
+                helper_text_mode: "on_focus"
+                helper_text: "Enter your name"
 
-        MDLabel:
-            id: name_field
-            text: "Name"
-            mode: "rectangle"
+            MDTextField:
+                hint_text: "Email"
+                mode: "rectangle"
+                size_hint_y: None
+                height: dp(40)
+                readonly: True
+                helper_text_mode: "on_focus"
+                helper_text: "Enter your email"
 
-        MDLabel:
-            id: email_field
-            text: "Email"
-            mode: "rectangle"
+            MDDropDownItem:
+                id: belt_rank_field
+                text: "Belt Rank"
+                on_release: root.menu.open()
 
-        MDDropDownItem:
-            id: belt_rank_field
-            text: "Belt Rank"
-            on_release: root.menu.open()
+            Widget:
+                size_hint_y: None
+                height: dp(20)
 '''
+
 Builder.load_string(KV)
 
 
 class ProfileScreen(MDScreen):
-    screen_manager = ObjectProperty()
     menu = None
 
     def on_enter(self):

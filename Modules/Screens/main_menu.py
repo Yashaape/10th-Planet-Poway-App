@@ -1,13 +1,22 @@
 from kivymd.uix.screen import MDScreen
 from kivy.lang import Builder
 
+# Dictionary to map screen names to formatted titles
+SCREEN_TITLES = {
+    'profile_screen': 'Profile',
+    'schedule_screen': 'Schedule',
+    'announcement_screen': 'Announcements',
+    'chat_screen': 'Chat'
+}
+
 KV = '''
 <MainMenuScreen>:
     name:'menu'
     BoxLayout:
         orientation: 'vertical'
         MDTopAppBar:
-            title: 'Navigation Drawer Demo'
+            id: top_app_bar
+            title:  root.get_screen_title(root.ids.screen_manager.current) # Bind title to formatted title
             left_action_items: [["menu", lambda x: nav_drawer.set_state("open")]]
             elevation: 4
         Widget:
@@ -44,4 +53,7 @@ Builder.load_string(KV)
 
 
 class MainMenuScreen(MDScreen):
-    pass
+
+    # Method to get formatted title based on screen name
+    def get_screen_title(self, screen_name):
+        return SCREEN_TITLES.get(screen_name, '')
