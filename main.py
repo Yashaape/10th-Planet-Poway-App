@@ -1,6 +1,5 @@
 from kivymd.app import MDApp
 from kivymd.uix.screenmanager import MDScreenManager
-from kivymd.uix.screen import MDScreen
 import Modules
 from Modules.Screens.login_screen import LoginScreen
 from Modules.Screens.main_menu import MainMenuScreen
@@ -9,9 +8,6 @@ from Modules.Screens.profile_screen import ProfileScreen
 from Modules.Screens.announcement_screen import AnnouncementScreen
 from Modules.Screens.chat_screen import ChatScreen
 
-from kivymd.uix.button import MDFlatButton
-from kivymd.uix.dialog import MDDialog
-from kivy.factory import Factory
 from kivy.core.window import Window
 
 
@@ -25,15 +21,6 @@ class MyApp(MDApp):
         self.theme_cls.primary_palette = 'Green'
         self.theme_cls.theme_style = "Dark"
         screen_manager = MDScreenManager()
-
-        Factory.register('LoginScreen', module='Modules.Screens.login_screen')
-        Factory.register('ClickableTextFieldRound', module='Modules.Widgets.clickable_text_field_round')
-        Factory.register('ProfileScreen', module='Modules.Screens.profile_screen')
-        Factory.register('MainMenuScreen', module='Modules.Screens.main_menu')
-        Factory.register('ContentNavigationDrawer', module='Modules.Widgets.content_navigation_drawer')
-        Factory.register('ScheduleScreen', module='Modules.Screens.schedule_screen')
-        Factory.register('ChatScreen', module='Modules.Screens.chat_screen')
-        Factory.register('AnnouncementScreen', module='Modules.Screens.announcement_screen')
 
         # Add other screens to the ScreenManager
         screen_manager.add_widget(LoginScreen(name='login'))
