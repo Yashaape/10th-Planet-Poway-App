@@ -45,35 +45,6 @@ class MyApp(MDApp):
 
         return screen_manager
 
-    def show_data(self):
-        # Retrieve the text from the username field and print it
-        username_text = self.root.current_screen.ids.clickable_text_field_round.ids.username_field.text
-        password_text = self.root.current_screen.ids.clickable_text_field_round.ids.text_field.text
-        print(f'Username: {username_text}, Password: {password_text}')
-
-    def login_dialog(self):
-        username_text = self.root.current_screen.ids.clickable_text_field_round.ids.username_field.text
-        password_text = self.root.current_screen.ids.clickable_text_field_round.ids.text_field.text
-        if username_text != "":
-            user_error = f"{username_text} user does not exist."
-        else:
-            if password_text == "":  # Replace with the actual correct password
-                user_error = "Username and password correct. Login success!"
-                self.root.current = 'main_menu'
-            else:
-                user_error = "Incorrect password."
-
-        self.dialog = MDDialog(title='Username check',
-                               text=user_error, size_hint=(0.8, 1),
-                               buttons=[MDFlatButton(text='Close', on_release=self.close_dialog),
-                                        MDFlatButton(text='More')]
-                               )
-        self.dialog.open()
-
-    def close_dialog(self, obj):
-        self.dialog.dismiss()
-        # do stuff after closing the dialog
-
     def logout(self):
         # Switch back to the login screen
         self.root.current = 'login'
