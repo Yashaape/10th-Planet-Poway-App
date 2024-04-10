@@ -4,6 +4,7 @@ from kivymd.uix.relativelayout import MDRelativeLayout
 from kivy.properties import StringProperty
 from kivymd.uix.button import MDFlatButton, MDIconButton, MDTextButton
 from kivymd.uix.dialog import MDDialog
+import psycopg2
 
 KV = '''
 <LoginScreen>:
@@ -22,7 +23,7 @@ KV = '''
         
 <ClickableTextFieldRound>:
     id: clickable_text_field_round
-    GridLayout:
+    MDGridLayout:
         cols: 1
         size_hint_y: None
         height: username_field.height + text_field.height + dp(20)

@@ -14,7 +14,7 @@ SCREEN_TITLES = {
 KV = '''
 <MainMenuScreen>:
     name:'menu'
-    BoxLayout:
+    MDBoxLayout:
         orientation: 'vertical'
         MDTopAppBar:
             id: top_app_bar
@@ -53,7 +53,7 @@ KV = '''
                 
 <ContentNavigationDrawer>
     name: 'content_nav_drawer'
-    BoxLayout:
+    MDBoxLayout:
         orientation: 'vertical'
         spacing: '8dp'
         padding: '8dp'

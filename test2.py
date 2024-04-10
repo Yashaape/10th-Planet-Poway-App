@@ -1,66 +1,54 @@
-from kivy.app import App
-from kivy.uix.screenmanager import ScreenManager
-from kivymd.uix.screen import MDScreen
-from kivy.lang import Builder
-from kivy.uix.label import Label
+import psycopg2
 
-KV = '''
-<ChatScreen>:
-    name: 'chat_screen'
+conn = psycopg2.connect(host="localhost", dbname="postgres",
+                        user="postgres", password="Critflaw!23", port=5432)
 
-    BoxLayout:
-        orientation: 'vertical'
+cur = conn.cursor()  # used to execute commands in postgres
 
-        MDToolbar:
-            title: 'Chat'
-            left_action_items: [["arrow-left", lambda x: app.change_screen('main')]]
+# Can be thought of as columns for the table
+cur.execute("""CREATE TABLE IF NOT EXISTS members  (
+    name VARCHAR(255),
+    email VARCHAR(255),
+    phone_number VARCHAR(255),
+    user_name VARCHAR(255),
+    password VARCHAR(255)
+);
+""")
 
-        ScrollView:
-            MDList:
-                id: chat_messages
+# Assigns values to each of the values above
+# Remember: You must delete the table in pgAdmin4 to rerun or you will get an error, otherwise comment out code
+# cur.execute("""INSERT INTO members (name, email, phone_number, user_name, password) VALUES
+# ('Brandon Rasgaitis', 'brasgaitis97@gmail.com', '7073459866', 'bran123', 'YashaApe!2748$'),
+# ('Kevin Berberich', 'berberator97@gmail.com', '6073459867', 'kberb123', 'Kev!@#'),
+# ('Kyle Kolod', 'kkolod97@gmail.com', '6073459868', 'kkolod123', 'Kolod!@#'),
+# ('Zach Shulchz', 'zshulchz97@gmail.com', '7073459869', 'zshulchz123', 'Schulchz!@#'),
+# ('Josh Jackson', 'jjackson97@gmail.com', '7073459870', 'jjackson123', 'Jackson!@#'),
+# ('Bobby', 'bobby97@gmail.com', '8073459866', 'bobby123', 'Bobby!@#');
+# """)
 
-        BoxLayout:
-            padding: '10dp'
-            spacing: '10dp'
+# Select some values
+cur.execute("""SELECT * FROM members WHERE name = 'Brandon Rasgaitis';""")
 
-            MDTextField:
-                id: message_input
-                hint_text: 'Type your message'
-                mode: 'fill'
+# cur.fetchone() gives only 1 result
+print(cur.fetchone())
+print()
 
-            MDIconButton:
-                icon: 'send'
-                on_release: app.send_message(message_input.text)
-'''
+# print out individual rows to the terminal
+cur.execute("""SELECT * FROM members WHERE starts_with(phone_number, %s);""", "7")
+for row in cur.fetchall():
+    print(row)
+print()
 
-Builder.load_string(KV)
+# Can't use built in methods for prepared statements, idk what that means
+# Use cur.mogrify() to format in multiple values
+# Good for trying to get values based on specific set of criteria
+sql = cur.mogrify("""SELECT * FROM members WHERE name LIKE 'K%%' AND password LIKE '%%!@#%%';""")
+print(sql)
+print()
+cur.execute(sql)
+print(cur.fetchall())
 
+conn.commit()
 
-class ChatScreen(MDScreen):
-    pass
-
-class MyApp(App):
-    def build(self):
-        self.screen_manager = ScreenManager()
-
-        # Create instances of screens
-        self.main_screen = Label(text="This is the main screen")
-        self.chat_screen = ChatScreen()
-
-        # Add screens to the screen manager
-        self.screen_manager.add_widget(self.main_screen)
-        self.screen_manager.add_widget(self.chat_screen)
-
-        return self.screen_manager
-
-    def change_screen(self, screen_name):
-        self.screen_manager.current = screen_name
-
-    def send_message(self, message):
-        # Code to send the message and update the UI
-        # You need to implement this according to your requirements
-        print("Sending message:", message)
-
-
-if __name__ == '__main__':
-    MyApp().run()
+cur.close()
+conn.close()
