@@ -1,7 +1,8 @@
 from kivymd.uix.screen import MDScreen
-from kivy.properties import ObjectProperty
+from kivy.properties import ObjectProperty, StringProperty
 from kivymd.uix.scrollview import MDScrollView
 from kivy.lang import Builder
+import psycopg2
 
 # Dictionary to map screen names to formatted titles
 SCREEN_TITLES = {
@@ -13,7 +14,7 @@ SCREEN_TITLES = {
 
 KV = '''
 <MainMenuScreen>:
-    name:'menu'
+    name:'main_menu'
     MDBoxLayout:
         orientation: 'vertical'
         MDTopAppBar:
@@ -22,7 +23,7 @@ KV = '''
             left_action_items: [["menu", lambda x: nav_drawer.set_state("open")]]
             elevation: 4
         Widget:
-        
+            
     MDNavigationLayout:
         MDScreenManager: #Very important, it's how each button will switch to a new screen
             id: screen_manager
@@ -51,7 +52,7 @@ KV = '''
                 screen_manager: screen_manager
                 nav_drawer: nav_drawer
                 
-<ContentNavigationDrawer>
+<ContentNavigationDrawer>:
     name: 'content_nav_drawer'
     MDBoxLayout:
         orientation: 'vertical'
@@ -60,12 +61,12 @@ KV = '''
         Image:
             source: '10thPlanetPoway.png'
         MDLabel:
-            text: 'Brandon'
+            id: first_name_label
             font_style: 'Subtitle1'
             size_hint_y: None
             height: self.texture_size[1]
         MDLabel:
-            text: 'brasgaitis97@gmail.com'
+            id: email_label
             font_style: 'Caption'
             size_hint_y: None
             height: self.texture_size[1]
@@ -119,7 +120,20 @@ class ContentNavigationDrawer(MDScrollView):
 
 
 class MainMenuScreen(MDScreen):
+    user_info = {}  # Initialize an empty dictionary to hold user info
+    first_name_label = StringProperty()
+    email_label = StringProperty()
+
+    # Method to set user info retrieved from login
+    def set_user_info(self, info):
+        self.user_info = info  # Set user_info dictionary
+
+        # Access MDLabel widgets and set their text to user info
+        self.ids.first_name_label.text = self.user_info.get('first_name', '')
+        self.ids.email_label.text = self.user_info.get('email', '')
 
     # Method to get formatted title based on screen name
     def get_screen_title(self, screen_name):
         return SCREEN_TITLES.get(screen_name, '')
+
+

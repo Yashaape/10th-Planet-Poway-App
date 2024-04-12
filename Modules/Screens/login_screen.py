@@ -8,6 +8,7 @@ import psycopg2
 
 KV = '''
 <LoginScreen>:
+    name: 'login'
     Image:
         source: '10thPlanetPoway.png'
         size_hint_y: None #allows setting a fixed height
@@ -97,14 +98,37 @@ class ClickableTextFieldRound(MDRelativeLayout):
     def login_dialog(self):
         username_text = self.ids.username_field.text
         password_text = self.ids.text_field.text
-        if username_text != "":
-            user_error = f"{username_text} user does not exist."
-        else:
-            if password_text == "":  # Replace with the actual correct password
+
+        # Establish a connection to the PostgreSQL database
+        conn = psycopg2.connect(host="localhost", dbname="postgres", user="postgres",
+                                password="Critflaw!23", port=5432)
+        cur = conn.cursor()
+
+        # Query the database to check if the username exists
+        cur.execute("""SELECT password FROM members WHERE username = %s""", (username_text,))
+        result = cur.fetchone()
+        print(result)
+        if result:  # If a record with the username is found
+            stored_password = result[0]
+            if password_text == stored_password:  # If the entered password matches the stored password
                 user_error = "Username and password correct. Login success!"
+                cur.execute("""SELECT first_name, last_name, email, phone_number, username FROM 
+                            members WHERE username = %s AND password = %s""", (username_text, stored_password))
+                user_data = cur.fetchone()
+                user_info = {
+                    "first_name": user_data[0],
+                    "last_name": user_data[1],
+                    "email": user_data[2],
+                    "phone_number": user_data[3],
+                    "username": user_data[4]
+                }
+                print(user_info)
+                #self.parent.parent.get_screen('main_menu').set_user_info(user_info)
                 self.parent.parent.current = 'main_menu'  # Access parent of parent (LoginScreen) to reach screen_manager
             else:
                 user_error = "Incorrect password."
+        else:
+            user_error = f"{username_text} user does not exist."
 
         dialog = MDDialog(title='Username check',
                           text=user_error, size_hint=(0.8, 1),
@@ -112,6 +136,10 @@ class ClickableTextFieldRound(MDRelativeLayout):
                                    MDFlatButton(text='More')]
                           )
         dialog.open()
+
+        # Close the database connection
+        cur.close()
+        conn.close()
 
     def close_dialog(self, dialog_instance):
         dialog_instance.dismiss()
