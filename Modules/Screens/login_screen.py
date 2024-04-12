@@ -122,8 +122,12 @@ class ClickableTextFieldRound(MDRelativeLayout):
                     "phone_number": user_data[3],
                     "username": user_data[4]
                 }
-                print(user_info)
-                #self.parent.parent.get_screen('main_menu').set_user_info(user_info)
+                # print(user_info)
+                # print("Parent:", self.parent)
+                # print("Parent's parent:", self.parent.parent)
+                # print("Main menu screen:", self.parent.parent.get_screen('main_menu'))
+                # print("Content navigation drawer:", self.parent.parent.get_screen('main_menu').ids.content_nav_drawer)
+                self.parent.parent.get_screen('main_menu').ids.content_nav_drawer.set_user_info(user_info)
                 self.parent.parent.current = 'main_menu'  # Access parent of parent (LoginScreen) to reach screen_manager
             else:
                 user_error = "Incorrect password."

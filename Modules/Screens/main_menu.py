@@ -49,6 +49,7 @@ KV = '''
             radius: (0, 16, 16, 0)
             
             ContentNavigationDrawer:
+                id: content_nav_drawer
                 screen_manager: screen_manager
                 nav_drawer: nav_drawer
                 
@@ -118,20 +119,13 @@ class ContentNavigationDrawer(MDScrollView):
     screen_manager = ObjectProperty()
     nav_drawer = ObjectProperty()
 
+    def set_user_info(self, user_info):
+        # Access MDLabel widgets and set their text to user info
+        self.ids.first_name_label.text = user_info.get('first_name', '')
+        self.ids.email_label.text = user_info.get('email', '')
+
 
 class MainMenuScreen(MDScreen):
-    user_info = {}  # Initialize an empty dictionary to hold user info
-    first_name_label = StringProperty()
-    email_label = StringProperty()
-
-    # Method to set user info retrieved from login
-    def set_user_info(self, info):
-        self.user_info = info  # Set user_info dictionary
-
-        # Access MDLabel widgets and set their text to user info
-        self.ids.first_name_label.text = self.user_info.get('first_name', '')
-        self.ids.email_label.text = self.user_info.get('email', '')
-
     # Method to get formatted title based on screen name
     def get_screen_title(self, screen_name):
         return SCREEN_TITLES.get(screen_name, '')
