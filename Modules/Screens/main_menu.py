@@ -33,15 +33,19 @@ KV = '''
                     halign: 'center'
 
             ProfileScreen:
+                id: profile_screen
                 name: 'profile_screen'
 
             ScheduleScreen:
+                id: schedule_screen
                 name: 'schedule_screen'
 
             AnnouncementScreen: #Might need to change later
+                id: announcement_screen
                 name: 'announcement_screen'
 
             ChatScreen: #Might need to change later
+                id: chat_screen
                 name: 'chat_screen'
 
         MDNavigationDrawer:

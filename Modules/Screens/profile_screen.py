@@ -5,6 +5,7 @@ from kivy.metrics import dp
 
 KV = '''
 <ProfileScreen>:
+    id: profile_screen
     name: 'profile_screen'
 
     MDBoxLayout:
@@ -24,6 +25,7 @@ KV = '''
                 allow_stretch: True  # Adjusts the aspect ratio to fit the space
 
             MDTextField:
+                id: name_label
                 hint_text: "Name"
                 mode: "rectangle"
                 size_hint_y: None
@@ -33,6 +35,7 @@ KV = '''
                 helper_text: "Enter your name"
 
             MDTextField:
+                id: email_label
                 hint_text: "Email"
                 mode: "rectangle"
                 size_hint_y: None
@@ -77,3 +80,9 @@ class ProfileScreen(MDScreen):
     def set_item(self, text_item):
         self.ids.belt_rank_field.set_item(text_item)
         self.menu.dismiss()
+
+    def set_user_info(self, user_info):
+        # Access MDLabel widgets and set their text to user info
+        self.ids.name_label.text = user_info.get('first_name', '') + ' ' + user_info.get('last_name', '')
+        self.ids.email_label.text = user_info.get('email', '')
+

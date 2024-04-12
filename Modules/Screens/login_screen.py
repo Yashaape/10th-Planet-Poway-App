@@ -8,6 +8,7 @@ import psycopg2
 
 KV = '''
 <LoginScreen>:
+    id: login
     name: 'login'
     Image:
         source: '10thPlanetPoway.png'
@@ -128,6 +129,7 @@ class ClickableTextFieldRound(MDRelativeLayout):
                 # print("Main menu screen:", self.parent.parent.get_screen('main_menu'))
                 # print("Content navigation drawer:", self.parent.parent.get_screen('main_menu').ids.content_nav_drawer)
                 self.parent.parent.get_screen('main_menu').ids.content_nav_drawer.set_user_info(user_info)
+                self.parent.parent.get_screen('main_menu').ids.profile_screen.set_user_info(user_info)
                 self.parent.parent.current = 'main_menu'  # Access parent of parent (LoginScreen) to reach screen_manager
             else:
                 user_error = "Incorrect password."
@@ -152,5 +154,3 @@ class ClickableTextFieldRound(MDRelativeLayout):
 
 class LoginScreen(MDScreen):
     pass
-
-
