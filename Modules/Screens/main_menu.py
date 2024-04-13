@@ -53,6 +53,7 @@ KV = '''
             radius: (0, 16, 16, 0)
             
             ContentNavigationDrawer:
+                name: 'content_nav_drawer'
                 id: content_nav_drawer
                 screen_manager: screen_manager
                 nav_drawer: nav_drawer

@@ -18,8 +18,9 @@ cur.execute("""CREATE TABLE IF NOT EXISTS members  (
 
 # Assigns values to each of the values above
 # Remember: You must delete the table in pgAdmin4 to rerun or you will get an error, otherwise comment out code
+# All dummy data, John Doe member has blank username and password QoL while coding.
 # cur.execute("""INSERT INTO members (first_name, last_name, email, phone_number, username, password) VALUES
-# ('', '', '', '', '', ''),
+# ('John', 'Doe', 'Jdoe97@gmail.com', '7145662332', '', ''),
 # ('Brandon', 'Rasgaitis', 'brasgaitis97@gmail.com', '7073459866', 'bran123', 'YashaApe!2748$'),
 # ('Kevin', 'Berberich', 'berberator97@gmail.com', '6073459867', 'kberb123', 'Kev!@#'),
 # ('Kyle', 'Kolod', 'kkolod97@gmail.com', '6073459868', 'kkolod123', 'Kolod!@#'),
