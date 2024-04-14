@@ -1,9 +1,14 @@
+from kivy.lang import Builder
 from kivymd.app import MDApp
 from kivymd.uix.screenmanager import MDScreenManager
-from kivymd.uix.screen import MDScreen
-#from Modules.Screens.profile_screen import ProfileScreen
-import Modules
-from kivy.factory import Factory
+
+
+KV = """
+
+
+"""
+
+Builder.load_string(KV)
 
 
 class MyScreenManager(MDScreenManager):
