@@ -106,3 +106,17 @@ class ChatScreen(MDScreen):
         self.handle_message(response)
 
 
+class AllLevelsScreen(ChatScreen):
+    pass
+
+
+class YouthAges4to8Screen(ChatScreen):
+    pass
+
+
+class YouthAges9to15Screen(ChatScreen):
+    pass
+
+
+class AdultFundamentalsScreen(ChatScreen):
+    pass

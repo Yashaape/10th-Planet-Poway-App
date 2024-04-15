@@ -1,6 +1,5 @@
 from kivymd.app import MDApp
 from kivymd.uix.screenmanager import MDScreenManager
-import Modules
 from Modules.Screens.login_screen import LoginScreen
 from Modules.Screens.main_menu import MainMenuScreen
 from Modules.Screens.schedule_screen import ScheduleScreen
@@ -8,7 +7,7 @@ from Modules.Screens.profile_screen import ProfileScreen
 from Modules.Screens.announcement_screen import AnnouncementScreen
 from Modules.Screens.chat_screen import ChatScreen
 
-from kivy.core.window import Window
+# from kivy.core.window import Window
 
 
 class MyScreenManager(MDScreenManager):
